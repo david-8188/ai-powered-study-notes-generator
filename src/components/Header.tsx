@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
               CF
             </div>
             <span className="font-display font-bold text-lg tracking-tight text-[#131b2e] group-hover:text-[#4648d4] transition-colors whitespace-nowrap">
-              Cognitive Focus
+              CognitiveFocus
             </span>
           </button>
         </div>
