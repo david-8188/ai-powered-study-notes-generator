@@ -1,113 +1,106 @@
-# StudyNotes AI — AI-Powered Study Notes Generator
+# CognitiveFocus
 
-StudyNotes AI is a Streamlit web app that turns lecture material and text-based PDF documents into structured study resources using the OpenAI API.
+**Live website:** https://cognitive-focus.ai.studio  
+**GitHub:** https://github.com/david-8188/cognitivefocus
+
+CognitiveFocus is an AI-assisted research and learning workspace designed for sustained concentration, active recall, and deeper understanding of complex technical material.
 
 ## Features
 
-- Upload a text-based PDF or paste study material directly.
-- Generate comprehensive notes, quick revision summaries, question-and-answer sets, flashcards, MCQ quizzes, key terms, or a complete study pack.
-- Choose a learning level: beginner, intermediate, advanced, or exam preparation.
-- Add a custom focus to guide the generated material.
-- Download generated material as Markdown or plain text.
-- Supply the API key through the sidebar or an environment variable; secrets are excluded from Git.
+- **Research reader:** Read structured research papers, navigate sections, inspect citations, highlight important passages, and use Bionic Focus reading support.
+- **Generative synthesis lab:** Explore concepts through a concept graph, audio briefing, and paper-grounded question-and-answer experience.
+- **Active recall:** Practice with flashcards, cloze deletion, and retrieval exams. Review actions use spaced-repetition intervals.
+- **Deep focus sessions:** Run timed focus and break cycles with optional synthesized audio.
+- **Research library:** Search the sample library and ingest custom paper or source text.
+- **Comprehension telemetry:** View learning and review analytics.
+
+The repository includes seeded sample research material for demonstration. Review generated or sample academic content against primary sources before relying on it.
+
+## Live demo
+
+Try the deployed Google AI Studio application here:
+
+**https://cognitive-focus.ai.studio**
 
 ## Tech stack
 
-- Python
-- Streamlit
-- OpenAI API
-- pypdf
-- python-dotenv
+- React 19 and TypeScript
+- Vite
+- Tailwind CSS 4
+- Google Gemini SDK (`@google/genai`)
+- Lucide React icons
+- Motion
 
 ## Run locally
 
-### 1. Clone the repository
+### Requirements
+
+- Node.js 22.12 or newer
+- npm
+
+### Install dependencies
 
 ```bash
-git clone https://github.com/david-8188/ai-powered-study-notes-generator.git
-cd ai-powered-study-notes-generator
+npm install
 ```
 
-### 2. Create and activate a virtual environment
+### Configure Gemini
 
-```bash
-python -m venv .venv
-```
-
-Windows PowerShell:
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-macOS/Linux:
-
-```bash
-source .venv/bin/activate
-```
-
-### 3. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Configure your OpenAI API key
-
-Copy `.env.example` to `.env` and replace the placeholder value:
+Create a local `.env.local` file in the project root. The current exported client-side integration looks for `VITE_GEMINI_API_KEY` first:
 
 ```env
-OPENAI_API_KEY=your_actual_api_key
+VITE_GEMINI_API_KEY=your_gemini_api_key
 ```
 
-You can also enter the key in the app's sidebar. Never commit your real API key or the `.env` file.
-
-### 5. Run the app
+Then start the development server:
 
 ```bash
-streamlit run app.py
+npm run dev
 ```
 
-Open the local URL shown in the terminal (normally http://localhost:8501).
+Open the local URL printed by Vite (the project config uses port 3000).
 
-## Deploy with Streamlit Community Cloud
+### Production build
 
-1. Sign in to [Streamlit Community Cloud](https://share.streamlit.io/).
-2. Create an app using this repository, the `main` branch, and `app.py`.
-3. In the app settings, add this secret:
-
-```toml
-OPENAI_API_KEY = "your_actual_api_key"
+```bash
+npm run build
+npm run preview
 ```
 
-4. Deploy the app.
+The production output is written to `dist/`.
+
+## API key security
+
+**Do not commit API keys to GitHub.** The current exported `src/services/aiService.ts` calls Gemini from the browser and reads a Vite environment variable. Vite-prefixed variables are included in the client-side bundle and can be inspected by website visitors. The live AI Studio deployment may provide its own managed secret environment, but a separately hosted production deployment should use a server-side API proxy (for example, a Cloud Run backend) and a restricted API key rather than publishing a personal Gemini key in frontend code.
+
+The app has a local deterministic fallback for some paper-question flows when Gemini is not configured. Other interface areas may use seeded/demo data.
 
 ## Project structure
 
 ```text
 .
-├── app.py
-├── requirements.txt
-├── .env.example
-├── .gitignore
-├── LICENSE
-└── README.md
+├── index.html
+├── package.json
+├── vite.config.ts
+├── tsconfig.json
+├── metadata.json
+├── public/
+│   └── assets/
+└── src/
+    ├── App.tsx
+    ├── components/
+    ├── data/
+    ├── services/
+    ├── types/
+    └── index.css
 ```
-
-## Notes and limitations
-
-- PDF extraction supports text-based PDFs. Scanned PDFs need OCR, which is not included.
-- Long source text is truncated to a maximum of 60,000 characters before being sent to the model.
-- Source material is sent to the OpenAI API when you generate content. Do not upload confidential information.
-- Generated study material may contain errors; verify important details against the original source.
-- API usage may incur charges under your OpenAI account.
 
 ## Resume description
 
-**AI-Powered Study Notes Generator | Python, Streamlit, OpenAI API, PyPDF**
+**CognitiveFocus | React, TypeScript, Vite, Tailwind CSS, Google Gemini API**
 
-Developed an AI-powered web application that extracts text from PDF documents and transforms learning material into structured notes, summaries, flashcards, key-term explanations, and MCQ quizzes. Integrated the OpenAI API for content generation and implemented downloadable study resources with environment-based API key management.
+Built an AI-assisted research and learning workspace featuring a structured paper reader, AI-based paper Q&A and synthesis, active-recall study modes, spaced-repetition flashcards, focus sessions with synthesized audio, a searchable research library, and learning telemetry.
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE).
+See [LICENSE](LICENSE).

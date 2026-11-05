@@ -1,0 +1,8 @@
+{
+  "name": "CognitiveFocus",
+  "description": "An editorial research and learning workspace for sustained cognitive endurance, active recall workflows, and AI-assisted synthesis of complex source materials.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
