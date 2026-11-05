@@ -232,7 +232,7 @@ export default function App() {
       <footer className="border-t border-[#e2e7ff] bg-white py-6 px-6 mt-16 text-xs text-[#767586]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="font-display font-bold text-[#131b2e]">Cognitive Focus Workspace</span>
+            <span className="font-display font-bold text-[#131b2e]">CognitiveFocus</span>
             <span aria-hidden="true">·</span>
             <span>Academic Rigor & Generative Synthesis</span>
           </div>
