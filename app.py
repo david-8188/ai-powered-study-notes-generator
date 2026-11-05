@@ -32,7 +32,7 @@ with st.sidebar:
     api_key_input = st.text_input(
         "OpenAI API key",
         type="password",
-        help="Optional if OPENAI_API_KEY is set in your .env file.",
+        help="Optional if OPENAI_API_KEY is set in your environment or Streamlit app secrets.",
     )
     st.caption("Your API key is used only for the current session and is not saved by this app.")
     st.divider()
@@ -40,7 +40,16 @@ with st.sidebar:
         "**How it works**\n1. Upload a PDF or paste text.\n2. Choose what to generate.\n3. Review and download your study pack."
     )
 
-api_key = api_key_input.strip() or os.getenv("OPENAI_API_KEY", "")
+try:
+    streamlit_secret = st.secrets.get("OPENAI_API_KEY", "")
+except Exception:
+    streamlit_secret = ""
+
+api_key = (
+    api_key_input.strip()
+    or os.getenv("OPENAI_API_KEY", "")
+    or streamlit_secret
+)
 
 
 def extract_pdf(uploaded_file) -> str:
